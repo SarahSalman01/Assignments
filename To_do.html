@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+    <style>
+        body {
+            background: url('https://i.pinimg.com/236x/7d/0a/77/7d0a775b306545eee4221b831b7c6cfa.jpg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .todo-container {
+            background-color: rgb(147, 117, 141);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin-bottom: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="todo-container">
+        <h2>MY TASKS</h2>
+        <form onsubmit="addTask(); return false;">
+            <div class="input-group">
+                <input type="text" id="todoInput" placeholder="Write Task Here... ">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+        <ul id="taskList"></ul>
+    </div>
+
+</body>
+<script>
+    function addTask() {
+        const input = document.getElementById('todoInput');
+        const taskValue = input.value;
+
+        if (taskValue.trim() === "") {
+            alert("Please enter a task!");
+            return;
+        }
+        const ul = document.getElementById('taskList');
+
+        const li = document.createElement('li');
+        li.innerHTML = `
+        ${taskValue}
+        <button class="delete-btn" onclick="removeTask(this)">Delete</button>
+    `;
+
+        ul.appendChild(li);
+
+        input.value = "";
+    }
+
+    function removeTask(button) {
+        const li = button.parentElement;
+        li.remove();
+    }
+</script>
+
+</html>

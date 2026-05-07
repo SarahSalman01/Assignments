@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #9face6);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 320px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        background: #4CAF50;
+        color: white;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #45a049;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 1.1rem;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Weather App</h1>
+
+    <input type="text" placeholder="Enter city name">
+
+    <button>Get Weather</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    let input = document.querySelector("input");
+    let btn = document.querySelector("button");
+    let result = document.getElementById("result");
+
+    btn.addEventListener("click", () => {
+
+        let cityName = input.value;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=560dc8bfa2794a7872a2c953177e7dd9&units=metric`)
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            result.innerHTML = `
+                <h2>${cityName}</h2>
+                <p>🌡 Temperature: ${data.main.temp}°C</p>
+                <p>☁ Condition: ${data.weather[0].main}</p>
+            `;
+        })
+
+        .catch(() => {
+            result.innerHTML = "City not found";
+        });
+
+    });
+</script>
+
+</body>
+</html>

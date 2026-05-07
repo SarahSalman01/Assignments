@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Counter App</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        text-align: center;
+        width: 300px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    #count {
+        font-size: 4rem;
+        margin: 20px 0;
+        transition: 0.3s;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    button {
+        flex: 1;
+        margin: 5px;
+        padding: 10px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    .inc { background: #4CAF50; color: white; }
+    .dec { background: #f44336; color: white; }
+    .reset { background: #555; color: white; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Counter</h1>
+
+    <div id="count">0</div>
+
+    <div class="buttons">
+        <button class="dec" onclick="decrease()">−</button>
+        <button class="reset" onclick="reset()">Reset</button>
+        <button class="inc" onclick="increase()">+</button>
+    </div>
+</div>
+
+<script>
+    let count = 0;
+    const min = 0;
+
+    function updateDisplay() {
+        const display = document.getElementById("count");
+        display.innerText = count;
+
+        if (count > 0) display.style.color = "#4CAF50";
+        else if (count < 0) display.style.color = "#f44336";
+        else display.style.color = "#333";
+    }
+
+    function increase() {
+        count++;
+        updateDisplay();
+    }
+
+    function decrease() {
+        if (count > min) {
+        count--;
+        updateDisplay();
+    }
+    }
+
+    function reset() {
+        count = 0;
+        updateDisplay();
+    }
+</script>
+
+</body>
+</html>
